@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流浪的句号</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #E8A87C;
+            --secondary-color: #F5D6C6;
+            --accent-color: #D4A574;
+            --bg-color: #FFF9F5;
+            --text-color: #5D4E4E;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --shadow-color: rgba(232, 168, 124, 0.3);
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            background: linear-gradient(135deg, #FFF9F5 0%, #FFE8D6 50%, #FFF5EE 100%);
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(232, 168, 124, 0.3), rgba(245, 214, 198, 0.3));
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .floating-shape:nth-child(1) { width: 300px; height: 300px; top: 10%; left: 10%; animation-delay: 0s; }
+        .floating-shape:nth-child(2) { width: 200px; height: 200px; top: 60%; left: 80%; animation-delay: -3s; }
+        .floating-shape:nth-child(3) { width: 250px; height: 250px; top: 30%; left: 70%; animation-delay: -6s; }
+        .floating-shape:nth-child(4) { width: 180px; height: 180px; top: 80%; left: 20%; animation-delay: -9s; }
+        .floating-shape:nth-child(5) { width: 220px; height: 220px; top: 50%; left: 40%; animation-delay: -12s; }
+        .floating-shape:nth-child(6) { width: 160px; height: 160px; top: 20%; left: 50%; animation-delay: -15s; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(30px, -30px) rotate(90deg); }
+            50% { transform: translate(0, -50px) rotate(180deg); }
+            75% { transform: translate(-30px, -30px) rotate(270deg); }
+        }
+
+        .paw prints {
+            position: fixed;
+            font-size: 24px;
+            opacity: 0.15;
+            animation: pawFloat 15s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        .paw:nth-child(1) { top: 15%; left: 5%; animation-delay: 0s; }
+        .paw:nth-child(2) { top: 35%; left: 90%; animation-delay: -2s; }
+        .paw:nth-child(3) { top: 55%; left: 8%; animation-delay: -4s; }
+        .paw:nth-child(4) { top: 75%; left: 85%; animation-delay: -6s; }
+        .paw:nth-child(5) { top: 25%; left: 75%; animation-delay: -8s; }
+        .paw:nth-child(6) { top: 65%; left: 15%; animation-delay: -10s; }
+
+        @keyframes pawFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.15; }
+            50% { transform: translateY(-20px) rotate(15deg); opacity: 0.25; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px var(--shadow-color);
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: var(--secondary-color);
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        main {
+            padding-top: 80px;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 80px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            line-height: 2.2;
+            color: var(--text-color);
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .hero-highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px var(--shadow-color);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .section-desc {
+            text-align: center;
+            color: var(--text-color);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.05rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 25px var(--shadow-color);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 35px var(--shadow-color);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card-text {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .card-items {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .card-items li {
+            padding: 10px 0;
+            border-bottom: 1px dashed var(--secondary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-items li:last-child {
+            border-bottom: none;
+        }
+
+        .card-items .item-icon {
+            font-size: 1.2rem;
+        }
+
+        .interactive-widget {
+            background: linear-gradient(135deg, rgba(232, 168, 124, 0.1), rgba(245, 214, 198, 0.2));
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 15px;
+        }
+
+        .widget-title {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        .widget-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .widget-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 15px var(--shadow-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 3px 20px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.03);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .stat-label {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .story-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 35px var(--shadow-color);
+        }
+
+        .story-img {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .story-content {
+            padding: 25px;
+        }
+
+        .story-title {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .story-text {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .resource-list {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 25px var(--shadow-color);
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .resource-info h4 {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .resource-info p {
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .help-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .help-option {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 3px 20px var(--shadow-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .help-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 25px var(--shadow-color);
+        }
+
+        .help-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .help-title {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .help-desc {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .donation-transparency {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 25px var(--shadow-color);
+        }
+
+        .donation-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px dashed var(--secondary-color);
+        }
+
+        .donation-item:last-child {
+            border-bottom: none;
+        }
+
+        .donation-type {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .donation-amount {
+            font-weight: 700;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        .progress-bar {
+            background: var(--secondary-color);
+            border-radius: 10px;
+            height: 10px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1s ease;
+        }
+
+        .community-section {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 25px var(--shadow-color);
+        }
+
+        .community-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .topic-tag {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, rgba(232, 168, 124, 0.2), rgba(245, 214, 198, 0.3));
+            border-radius: 20px;
+            color: var(--accent-color);
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .topic-tag:hover {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        .qa-item {
+            padding: 20px 0;
+            border-bottom: 1px dashed var(--secondary-color);
+        }
+
+        .qa-item:last-child {
+            border-bottom: none;
+        }
+
+        .qa-question {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qa-answer {
+            color: var(--text-color);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            padding-left: 30px;
+        }
+
+        .film-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .film-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 20px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .film-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .film-cover {
+            height: 180px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+        }
+
+        .film-info {
+            padding: 20px;
+        }
+
+        .film-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .film-desc {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .feedback-section {
+            background: linear-gradient(135deg, rgba(232, 168, 124, 0.1), rgba(245, 214, 198, 0.2));
+            border-radius: 30px;
+            padding: 50px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 10px 40px var(--shadow-color);
+        }
+
+        .feedback-title {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .feedback-text {
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-size: 1.05rem;
+        }
+
+        .feedback-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            min-height: 120px;
+            transition: border-color 0.3s ease;
+        }
+
+        .feedback-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .feedback-form input {
+            padding: 15px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 15px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .feedback-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .submit-btn {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px var(--shadow-color);
+        }
+
+        .ending {
+            text-align: center;
+            padding: 100px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .ending-title {
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            margin-bottom: 30px;
+        }
+
+        .ending-text {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--text-color);
+            margin-bottom: 25px;
+        }
+
+        .ending-highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .ending-cta {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-color);
+        }
+
+        .ending-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px var(--shadow-color);
+        }
+
+        footer {
+            background: var(--card-bg);
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 -5px 25px var(--shadow-color);
+        }
+
+        .footer-text {
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        .footer-icon {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .modal-text {
+            color: var(--text-color);
+            margin-bottom: 25px;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-color);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            box-shadow: 0 4px 20px var(--shadow-color);
+            z-index: 3000;
+            transition: transform 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 10px;
+                padding-top: 15px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.3rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feedback-section {
+                padding: 30px 20px;
+            }
+
+            .ending-title {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <div class="paw prints">
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+    </div>
+
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">
+                <span class="logo-icon">🏠</span>
+                <span>流浪的句号</span>
+            </a>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <nav id="mainNav">
+                <a href="#adoption">领养中心</a>
+                <a href="#lost-found">让爱回家</a>
+                <a href="#tips">救助笔记</a>
+                <a href="#resources">附近资源</a>
+                <a href="#stories">领养故事</a>
+                <a href="#films">毛茸茸片单</a>
+                <a href="#help">我要帮忙</a>
+                <a href="#transparency">收支细则</a>
+                <a href="#community">互助社群</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>你好，欢迎来到《流浪的句号》</h1>
+                <p class="hero-subtitle">每一个流浪的故事，都应该有一个温暖的结局</p>
+                <div class="hero-text">
+                    <p>可能是一只躲在车底的猫，一个翻垃圾桶的背影。也可能，是你为它停下脚步的那几分钟。</p>
+                    <p>我们希望做的，是让每一次不忍心，都能找到对的方向——</p>
+                    <p>你此刻的每一次点击、转发、分享，都可能成为一个生命流浪的终点。</p>
+                    <p class="hero-highlight">让我们一起，把流浪的句号，画在相遇的这一刻。</p>
+                </div>
+                <a href="#adoption" class="hero-cta">从现在开始 →</a>
+            </div>
+        </section>
+
+        <section id="adoption" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🐾</span>
+                领养中心
+            </h2>
+            <p class="section-desc">每一只出现在这里的毛孩子，都在等一个不再流浪的家。如果你认真考虑过了，我们可以帮你联系。</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🐱</div>
+                    <h3 class="card-title">待领养猫咪 橘子</h3>
+                    <p class="card-text">5岁，橘猫</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">📍</span> 北京朝阳</li>
+                        <li><span class="item-icon">☀️</span> 性格温顺，最爱趴在窗边晒太阳，会在你脚边蹭来蹭去</li>
+                        <li><span class="item-icon">💉</span> 已绝育、已驱虫、疫苗齐全</li>
+                    </ul>
+                    <div class="interactive-widget">
+                        <div class="widget-title">你可以这样帮助它</div>
+                        <button class="widget-btn" onclick="showInterest('猫咪')">我想了解</button>
+                        <button class="widget-btn" onclick="sharePet('猫咪')">转发帮助</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🐶</div>
+                    <h3 class="card-title">待领养狗狗 豆豆</h3>
+                    <p class="card-text">1岁，柯基串串</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">📍</span> 上海浦东</li>
+                        <li><span class="item-icon">☀️</span> 性格开朗，喜欢户外奔跑，已完成基础训练</li>
+                        <li><span class="item-icon">💉</span> 已绝育、已驱虫、疫苗齐全</li>
+                    </ul>
+                    <div class="interactive-widget">
+                        <div class="widget-title">你可以这样帮助它</div>
+                        <button class="widget-btn" onclick="showInterest('狗狗')">我想了解</button>
+                        <button class="widget-btn" onclick="sharePet('狗狗')">转发帮助</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🐹</div>
+                    <h3 class="card-title">待领养仓鼠 布丁</h3>
+                    <p class="card-text">1岁，金丝熊</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">📍</span> 广州天河</li>
+                        <li><span class="item-icon">☀️</span> 圆滚滚的吃货，喜欢跑轮</li>
+                        <li><span class="item-icon">🏠</span> 附带笼子和粮食</li>
+                    </ul>
+                    <div class="interactive-widget">
+                        <div class="widget-title">你可以这样帮助它</div>
+                        <button class="widget-btn" onclick="showInterest('仓鼠')">我想了解</button>
+                        <button class="widget-btn" onclick="sharePet('仓鼠')">转发帮助</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">128</div>
+                    <div class="stat-label">已成功领养</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">45</div>
+                    <div class="stat-label">正在等待</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">本月新增</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="lost-found" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🔍</span>
+                让爱回家
+            </h2>
+            <p class="section-desc">猫咪走丢第三天、路边遇到一窝奶狗、小区里多了张新面孔……不管是"谁家孩子跑丢了"还是"谁能带它回家"，把信息留在这里，让更多人看见。</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🆘</div>
+                    <h3 class="card-title">走失宠物</h3>
+                    <p class="card-text">主人正在焦急寻找走失的毛孩子，您的每一次转发都可能帮助它们回家。</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">🐱</span> 橘猫“大黄”，5岁，公。鼻头有一颗小黑痣，左耳有缺角，走失时戴红色项圈。</li>
+                        <li><span class="item-icon">📍</span> 走失地点：北京朝阳公园南门公交站旁</li>
+                        <li><span class="item-icon">📅</span> 走失时间：2026年3月17日</li>
+                    </ul>
+                    <div class="interactive-widget">
+                        <div class="widget-title">帮它回家</div>
+                        <button class="widget-btn" onclick="shareLost('大黄')">转发扩散</button>
+                        <button class="widget-btn" onclick="reportFound()">我见过它</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🏠</div>
+                    <h3 class="card-title">流浪动物发现</h3>
+                    <p class="card-text">在路边发现了一只流浪动物？留下信息，让有能力的救助人能看到。</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">🐕</span> 发现一只黑色拉布拉多</li>
+                        <li><span class="item-icon">📍</span> 发现地点：浦东新区张江路地铁站3号口</li>
+                        <li><span class="item-icon">📝</span> 状态：已确认安全，暂由发现人照看</li>
+                    </ul>
+                    <div class="interactive-widget">
+                        <div class="widget-title">我能帮忙</div>
+                        <button class="widget-btn" onclick="offerHelp()">提供临时住所</button>
+                        <button class="widget-btn" onclick="contactRescuer()">联系救助人</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px;">
+                <div class="widget-title">发布走失/流浪信息</div>
+                <button class="widget-btn" onclick="showPublishForm('lost')">发布走失信息</button>
+                <button class="widget-btn" onclick="showPublishForm('stray')">发布流浪信息</button>
+            </div>
+        </section>
+
+        <section id="tips" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">📝</span>
+                救助笔记
+            </h2>
+            <p class="section-desc">第一次抓猫被挠了？喂奶猫结果喂拉稀了？这些坑我们都踩过。把它们写在这里，希望能帮到你。</p>
+
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon">🩹</div>
+                    <h3 class="card-title">如何安全抓流浪猫</h3>
+                    <p class="card-text">新手必看！正确的捕捉方法可以保护你，也保护猫咪。</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">✓</span> 使用食物引诱，不要强行追赶</li>
+                        <li><span class="item-icon">✓</span> 戴好防护手套，避免被抓伤</li>
+                        <li><span class="item-icon">✓</span> 准备好运输笼，提前铺好旧毛巾</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🍼</div>
+                    <h3 class="card-title">奶猫喂养指南</h3>
+                    <p class="card-text">关于0-4周龄奶猫的喂养知识，新手必读！</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">✓</span> 选择专用奶粉，不要喂牛奶</li>
+                        <li><span class="item-icon">✓</span> 保持趴卧姿势，不要仰头</li>
+                        <li><span class="item-icon">✓</span> 帮助排便排尿</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">💊</div>
+                    <h3 class="card-title">猫咪常见疾病处理</h3>
+                    <p class="card-text">猫瘟、感冒、口炎等常见疾病的识别与应对。</p>
+                    <ul class="card-items">
+                        <li><span class="item-icon">✓</span> 早期症状识别</li>
+                        <li><span class="item-icon">✓</span> 何时需要就医</li>
+                        <li><span class="item-icon">✓</span> 居家护理要点</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px;">
+                <div class="widget-title">更多笔记</div>
+                <button class="widget-btn" onclick="loadMoreTips()">查看全部笔记</button>
+                <button class="widget-btn" onclick="showShareTip()">分享我的经验</button>
+            </div>
+        </section>
+
+        <section id="resources" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">📍</span>
+                附近资源
+            </h2>
+            <p class="section-desc">愿意接流浪动物的医院、有绝育补贴的机构、还能腾出笼位的救助站……都在这里！</p>
+
+            <div class="resource-list">
+                <div class="resource-item">
+                    <div class="resource-icon">🏥</div>
+                    <div class="resource-info">
+                        <h4>爱心动物医院</h4>
+                        <p>地址：北京市朝阳区甜水园街16号 | 电话：010-6508-1234</p>
+                        <p>备注：流浪动物就诊享8折优惠，提供夜诊服务</p>
+                    </div>
+                </div>
+
+                <div class="resource-item">
+                    <div class="resource-icon">💉</div>
+                    <div class="resource-info">
+                        <h4>流浪猫绝育补贴项目</h4>
+                        <p>机构：北京萌爪动物保护协会 | 联系电话：400-882-3823</p>
+                        <p>备注：流浪母猫绝育补贴150元/只，公猫80元/只</p>
+                    </div>
+                </div>
+
+                <div class="resource-item">
+                    <div class="resource-icon">🏠</div>
+                    <div class="resource-info">
+                        <h4>临时救助站</h4>
+                        <p>地址：上海市浦东新区崂山路300号 | 联系人：李阿姨 138-1234-5678</p>
+                        <p>备注：可临时收容流浪猫15只，提供基础医疗</p>
+                    </div>
+                </div>
+
+                <div class="resource-item">
+                    <div class="resource-icon">🍖</div>
+                    <div class="resource-info">
+                        <h4>免费猫粮领取点</h4>
+                        <p>多个社区设有定点领取，联系获取最近位置</p>
+                        <p>备注：经济困难的救助者可申请免费粮</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px;">
+                <div class="widget-title">资源合作</div>
+                <button class="widget-btn" onclick="addResource()">添加资源信息</button>
+                <button class="widget-btn" onclick="searchResources()">搜索附近资源</button>
+            </div>
+        </section>
+
+        <section id="stories" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">❤️</span>
+                领养故事
+            </h2>
+            <p class="section-desc">被领养之后，它们过得好吗？领养不是终点，是另一个故事的开始。这里有它在新家撒娇、闯祸、被宠爱的日常。关心它们的人，可以来看看。</p>
+
+            <div class="story-grid">
+                <div class="story-card">
+                    <div class="story-img">🐱</div>
+                    <div class="story-content">
+                        <h3 class="story-title">"小花生"的新生活</h3>
+                        <p class="story-text">从躲在车底到现在霸占沙发，小花生已经来到新家半年了。每天最大的爱好就是对着窗外的小鸟发呆，然后偷偷蹭一下主人的腿求小鱼干。</p>
+                        <div class="interactive-widget" style="margin-top: 15px;">
+                            <button class="widget-btn" onclick="likeStory('小花生')">❤️ 祝福它们</button>
+                            <button class="widget-btn" onclick="shareStory('小花生')">分享故事</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-img">🐶</div>
+                    <div class="story-content">
+                        <h3 class="story-title">"豆豆"的逆袭之路</h3>
+                        <p class="story-text">曾经被人遗弃的豆豆，现在已经成为小区里最受欢迎的狗。每天遛弯都有一群小朋友围着它转，性格温柔得不像话。</p>
+                        <div class="interactive-widget" style="margin-top: 15px;">
+                            <button class="widget-btn" onclick="likeStory('豆豆')">❤️ 祝福它们</button>
+                            <button class="widget-btn" onclick="shareStory('豆豆')">分享故事</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-img">🐱</div>
+                    <div class="story-content">
+                        <h3 class="story-title">"年糕"的幸福猫生</h3>
+                        <p class="story-text">年糕是被从垃圾堆里救回来的，现在它最喜欢的地方是家里的猫爬架最高层，以及妈妈的被窝。养宠物真的可以治愈人。</p>
+                        <div class="interactive-widget" style="margin-top: 15px;">
+                            <button class="widget-btn" onclick="likeStory('年糕')">❤️ 祝福它们</button>
+                            <button class="widget-btn" onclick="shareStory('年糕')">分享故事</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px; text-align: center;">
+                <div class="widget-title">分享你家宝贝的故事</div>
+                <button class="widget-btn" onclick="showShareStory()">投稿领养故事</button>
+            </div>
+        </section>
+
+        <section id="films" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🎬</span>
+                毛茸茸片单
+            </h2>
+            <p class="section-desc">屏幕里的毛茸茸，也能治愈屏幕外的你。分享一些关于小动物的电影、纪录片和书籍。</p>
+
+            <div class="film-list">
+                <div class="film-card">
+                    <div class="film-cover">🎬</div>
+                    <div class="film-info">
+                        <h4 class="film-title">《忠犬八公》</h4>
+                        <p class="film-desc">大学教授帕克在车站捡到一只秋田犬，取名八公。每天早餐，八公送他到车站；傍晚，又准时趴在那里等他回来。有一天帕克突然离世，再也没有从车站走出来。而八公依旧每天傍晚去等，一等就是九年。有些等待没有原因，就像有些爱不需要理由。</p>
+                    </div>
+                </div>
+
+                <div class="film-card">
+                    <div class="film-cover">📺</div>
+                    <div class="film-info">
+                        <h4 class="film-title">《流浪猫鲍勃》</h4>
+                        <p class="film-desc">街头艺人詹姆斯正在戒毒，生活一团糟。有一天，他在公寓走廊发现了一只受伤的橘猫，取名鲍勃，用仅剩的钱给它治病。从那以后，鲍勃每天陪他上街表演，路人开始停下来拍照、听他唱歌。鲍勃的出现，让詹姆斯第一次觉得自己被需要。有时候不是我们救了动物，而是动物救了我们。</p>
+                    </div>
+                </div>
+
+                <div class="film-card">
+                    <div class="film-cover">🎥</div>
+                    <div class="film-info">
+                        <h4 class="film-title">《十二夜》</h4>
+                        <p class="film-desc">关于一只流浪狗被送进收容所里等待命运的纪录片。镜头跟随它从第一天走到最后一天，没有旁白，没有配乐，只有铁笼、眼神和安静的等待，一共十二夜。每一个生命，都值得被看见。</p>
+                    </div>
+                </div>
+
+                <div class="film-card">
+                    <div class="film-cover">📚</div>
+                    <div class="film-info">
+                        <h4 class="film-title">《遇见你，遇见你》</h4>
+                        <p class="film-desc">一本关于人与动物之间羁绊的温情读物，里面是普通人写给自己毛孩子的信。有的写它爱偷吃、有的写它生病走了、有的写它是怎么从路边捡回来的。读完你会想：还好遇见了它。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px; text-align: center;">
+                <div class="widget-title">推荐片单</div>
+                <button class="widget-btn" onclick="recommendFilm()">我要推荐</button>
+                <button class="widget-btn" onclick="requestFilm()">请求推荐</button>
+            </div>
+        </section>
+
+        <section id="help" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">🙌</span>
+                我要帮忙
+            </h2>
+            <p class="section-desc">想帮忙？来这里！捐一碗粮、转一条信息、提供一个临时落脚点、或者只是来当一天的铲屎义工都可以，爱心不设门槛。</p>
+
+            <div class="help-options">
+                <div class="help-option" onclick="showHelpDetail('food')">
+                    <div class="help-icon">🍖</div>
+                    <h4 class="help-title">物资捐赠</h4>
+                    <p class="help-desc">当前急需旧毛毯、旧猫窝、未开封的猫粮狗粮...你闲置的，可能是它需要的。</p>
+                </div>
+
+                <div class="help-option" onclick="showHelpDetail('spread')">
+                    <div class="help-icon">📢</div>
+                    <h4 class="help-title">技能/资源支持</h4>
+                    <p class="help-desc">设计海报、写文案、认识宠物医院能打折、有场地举办领养日...你擅长的，也能帮上忙。</p>
+                </div>
+
+                <div class="help-option" onclick="showHelpDetail('home')">
+                    <div class="help-icon">🏠</div>
+                    <h4 class="help-title">提供临时住所</h4>
+                    <p class="help-desc">如果你家有多出来的一个阳台、一间空房，可以成为它流浪路上的一个温暖驿站。</p>
+                </div>
+
+                <div class="help-option" onclick="showHelpDetail('volunteer')">
+                    <div class="help-icon">🧹</div>
+                    <h4 class="help-title">做一天义工</h4>
+                    <p class="help-desc">帮忙打扫、喂食、陪玩</p>
+                </div>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px; text-align: center;">
+                <div class="widget-title">联系方式</div>
+                <button class="widget-btn" onclick="contactUs()">联系我们</button>
+                <button class="widget-btn" onclick="joinVolunteer()">加入义工群</button>
+            </div>
+        </section>
+
+        <section id="transparency" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">📊</span>
+                收支细则
+            </h2>
+            <p class="section-desc">每一笔捐款、每一袋粮的去向，都在这里。定期更新，公开可查。</p>
+
+            <div class="donation-transparency">
+                <h3 style="color: var(--accent-color); margin-bottom: 20px;">本月收入公示</h3>
+                <div class="donation-item">
+                    <span class="donation-type">💰 爱心捐款</span>
+                    <span class="donation-amount">¥ 12,580</span>
+                </div>
+                <div class="donation-item">
+                    <span class="donation-type">🍖 捐赠猫狗粮（折价）</span>
+                    <span class="donation-amount">¥ 8,320</span>
+                </div>
+                <div class="donation-item">
+                    <span class="donation-type">🏥 医疗物资</span>
+                    <span class="donation-amount">¥ 3,650</span>
+                </div>
+
+                <h3 style="color: var(--accent-color); margin: 30px 0 20px;">本月支出公示</h3>
+                <div class="donation-item">
+                    <span class="donation-type">🏥 医疗费用（疫苗、绝育、治疗）</span>
+                    <span class="donation-amount">¥ 15,200</span>
+                </div>
+                <div class="donation-item">
+                    <span class="donation-type">🍖 猫狗粮采购</span>
+                    <span class="donation-amount">¥ 6,800</span>
+                </div>
+                <div class="donation-item">
+                    <span class="donation-type">🏠 场地租金</span>
+                    <span class="donation-amount">¥ 2,500</span>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 85%;"></div>
+                </div>
+                <p style="text-align: center; margin-top: 10px; color: var(--text-color);">本月执行率：85%</p>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px; text-align: center;">
+                <div class="widget-title">查看更多</div>
+                <button class="widget-btn" onclick="viewHistory()">历史记录</button>
+                <button class="widget-btn" onclick="downloadReport()">下载报表</button>
+            </div>
+        </section>
+
+        <section id="community" class="section">
+            <h2 class="section-title">
+                <span class="section-icon">💬</span>
+                互助社群
+            </h2>
+            <p class="section-desc">猫卡在墙缝里怎么办？奶猫不喝奶怎么办？附近还有谁也在做救助？救助路上遇到难题，群里有人在。</p>
+
+            <div class="community-section">
+                <h3 style="color: var(--accent-color); margin-bottom: 15px;">热门话题</h3>
+                <div class="community-topics">
+                    <span class="topic-tag">#猫咪不吃饭怎么办</span>
+                    <span class="topic-tag">#奶猫拉稀急救</span>
+                    <span class="topic-tag">#猫咪应激处理</span>
+                    <span class="topic-tag">#求助流浪猫</span>
+                    <span class="topic-tag">#领养前准备</span>
+                    <span class="topic-tag">#绝育知识</span>
+                </div>
+
+                <h3 style="color: var(--accent-color); margin: 30px 0 15px;">常见问答</h3>
+                <div class="qa-item">
+                    <div class="qa-question">🐱 猫咪精神不好但吃东西，是生病了吗？</div>
+                    <div class="qa-answer">建议观察24小时，如果持续不吃或出现其他症状（如呕吐、腹泻），应及时就医。轻微食欲不振可以先尝试换口味或加温食物。</div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">🍼 捡到奶猫怎么处理？</div>
+                    <div class="qa-answer">先保暖，用温水冲泡专用奶粉（不能喂牛奶），每2-3小时喂一次。如果眼睛还没睁开，说明是新生猫，需要更多护理。</div>
+                </div>
+                <div class="qa-item">
+                    <div class="qa-question">💊 流浪猫多大可以绝育？</div>
+                    <div class="qa-answer">一般建议6个月以上、体重超过2.5斤就可以进行绝育手术。绝育可以有效控制流浪猫繁殖数量。</div>
+                </div>
+            </div>
+
+            <div class="interactive-widget" style="margin-top: 30px; padding: 25px; text-align: center;">
+                <div class="widget-title">加入社群</div>
+                <button class="widget-btn" onclick="joinGroup()">加入微信群</button>
+                <button class="widget-btn" onclick="askQuestion()">发布问题</button>
+                <button class="widget-btn" onclick="answerQuestion()">帮助他人</button>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="feedback-section">
+                <h2 class="feedback-title">💬 你有什么想要和我们说的吗？</h2>
+                <p class="feedback-text">无论是建议、问题、还是只是想打个招呼，我们都很乐意收到你的消息。</p>
+                <form class="feedback-form" onsubmit="submitFeedback(event)">
+                    <input type="text" placeholder="你的昵称（选填）" id="feedbackName">
+                    <input type="email" placeholder="你的邮箱（选填）" id="feedbackEmail">
+                    <textarea placeholder="在这里写下你想说的话..." id="feedbackMessage" required></textarea>
+                    <button type="submit" class="submit-btn">提交</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="ending">
+            <h2 class="ending-title">🌟 流浪的句号，不是救下这一只，而是流浪不再发生。</h2>
+            <p class="ending-text">
+                <span class="ending-highlight">绝育代替繁殖，领养代替购买，不弃养代替一时冲动。</span><br><br>
+                这条路很长，但每走一步都算数。<br><br>
+                谢谢你看到这里。如果可以，也请帮忙转发一下。<br><br>
+                <span class="ending-highlight">让需要的人找到这里，让流浪少一次发生。</span>
+            </p>
+            <a href="#" class="ending-cta" onclick="shareToFriend()">😊 分享给朋友</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-icon">🏠🐾</div>
+        <p class="footer-text">流浪的句号 | 让每一次相遇，都是温暖的开始</p>
+        <p class="footer-text" style="margin-top: 10px; font-size: 0.85rem;">© 2026 流浪的句号. 用爱点亮每一个生命。</p>
+    </footer>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-icon" id="modalIcon">✅</div>
+            <h3 class="modal-title" id="modalTitle">操作成功</h3>
+            <p class="modal-text" id="modalText">感谢你的参与！</p>
+            <button class="submit-btn" onclick="closeModal()">好的</button>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">操作成功！</div>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('active');
+        }
+
+        function showModal(icon, title, text) {
+            document.getElementById('modalIcon').textContent = icon;
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalText').textContent = text;
+            document.getElementById('modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('active');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        function showInterest(type) {
+            showModal('🐾', '感谢你的关注', `你对待领养${type}感兴趣，我们会尽快联系你了解更多情况！`);
+        }
+
+        function sharePet(type) {
+            showToast('转发成功！让更多人看到');
+            if (navigator.share) {
+                navigator.share({
+                    title: '流浪的句号 - 领养中心',
+                    text: `有一只可爱的${type}正在等待领养，点击查看详情！`,
+                    url: window.location.href
+                });
+            }
+        }
+
+        function shareLost(name) {
+            showToast(`正在转发${name}的寻宠信息...`);
+        }
+
+        function reportFound() {
+            showModal('📍', '报告发现', '请描述你看到宠物的地点、时间和特征，我们会尽快通知主人。');
+        }
+
+        function offerHelp() {
+            showModal('🏠', '提供帮助', '感谢你愿意提供临时住所！请留下联系方式，我们会尽快与你联系。');
+        }
+
+        function contactRescuer() {
+            showToast('正在联系救助人...');
+        }
+
+        function showPublishForm(type) {
+            showModal('📝', '发布信息', `请填写${type === 'lost' ? '走失' : '流浪'}信息，我们会尽快审核发布。`);
+        }
+
+        function loadMoreTips() {
+            showToast('正在加载更多笔记...');
+        }
+
+        function showShareTip() {
+            showModal('📝', '分享经验', '感谢你愿意分享！请写下你的救助经验，我们会整理后发布。');
+        }
+
+        function addResource() {
+            showModal('📍', '添加资源', '请提供资源名称、地址、联系方式等信息，我们会审核后添加。');
+        }
+
+        function searchResources() {
+            showToast('正在搜索附近资源...');
+        }
+
+        function likeStory(name) {
+            showToast(`❤️ 你祝福了${name}！`);
+        }
+
+        function shareStory(name) {
+            showToast(`正在分享${name}的故事...`);
+        }
+
+        function showShareStory() {
+            showModal('📝', '投稿故事', '感谢你愿意分享领养故事！请上传照片和文字描述，我们会整理后发布。');
+        }
+
+        function recommendFilm() {
+            showModal('🎬', '推荐影片', '请写下你想推荐的影片名称和推荐理由，我们会整理后加入片单。');
+        }
+
+        function requestFilm() {
+            showModal('📺', '请求推荐', '告诉我们你喜欢的类型（治愈/感人/纪实等），我们为你推荐合适的影片！');
+        }
+
+        function showHelpDetail(type) {
+            const titles = {
+                'food': '捐一碗粮',
+                'spread': '转发扩散',
+                'home': '提供临时住所',
+                'volunteer': '做一天义工'
+            };
+            const texts = {
+                'food': '你的捐款将用于购买猫狗粮，每一笔都会公示。',
+                'spread': '转发走失信息和领养信息，让更多人看到。',
+                'home': '为暂时无处可去的流浪动物提供一个安全的临时居所。',
+                'volunteer': '帮忙打扫、喂食、陪玩，体验救助者的日常。'
+            };
+            showModal('🙌', titles[type], texts[type] + ' 联系我们了解具体参与方式！');
+        }
+
+        function contactUs() {
+            showModal('📱', '联系我们', '邮箱：contact@liulangdejuhao.com\n微信：liulangdejuhao\n期待与你联系！');
+        }
+
+        function joinVolunteer() {
+            showModal('👥', '加入义工群', '长按识别二维码或搜索微信号：liulangdejuhao，备注"加入义工"');
+        }
+
+        function viewHistory() {
+            showToast('正在加载历史记录...');
+        }
+
+        function downloadReport() {
+            showToast('正在生成报表...');
+        }
+
+        function joinGroup() {
+            showModal('👥', '加入互助群', '长按识别二维码或搜索微信号加入社群，和更多救助者交流经验！');
+        }
+
+        function askQuestion() {
+            showModal('❓', '发布问题', '请详细描述你的问题，社群里的朋友们会尽力帮助！');
+        }
+
+        function answerQuestion() {
+            showToast('感谢你愿意帮助他人！');
+        }
+
+        function shareToFriend() {
+            showToast('感谢分享！让更多人看到');
+            if (navigator.share) {
+                navigator.share({
+                    title: '流浪的句号',
+                    text: '每一个流浪的故事，都应该有一个温暖的结局。让我们一起把流浪的句号，画在相遇的这一刻。',
+                    url: window.location.href
+                });
+            }
+        }
+
+        function submitFeedback(event) {
+            event.preventDefault();
+            const name = document.getElementById('feedbackName').value;
+            const message = document.getElementById('feedbackMessage').value;
+
+            if (!message.trim()) {
+                showToast('请输入你想说的话');
+                return;
+            }
+
+            showModal('💕', '谢谢你的消息', name ? `${name}，感谢你！` : '感谢你！') + '你的每一条消息都是我们前进的动力。';
+            document.getElementById('feedbackName').value = '';
+            document.getElementById('feedbackEmail').value = '';
+            document.getElementById('feedbackMessage').value = '';
+        }
+
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth' });
+                        document.getElementById('mainNav').classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
